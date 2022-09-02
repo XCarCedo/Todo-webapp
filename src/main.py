@@ -28,16 +28,33 @@ def index_page():
 
 @app.route("/delete/<int:record_id>")
 def delete_page(record_id: int):
-    """Delete todo based on the id given from the link
+    """Delete todo using record_id
     
     Args:
-        id (int): The id of todo wanted to be deleted
+        id (int): The id of todo
     """
     todo_record = Todo.query.get_or_404(record_id)
     db.session.delete(todo_record)
     db.session.commit()
     return redirect("/")
-	
+
+@app.route("/update/<int:record_id>", methods = ["POST", "GET"])
+def update_page(record_id: int):
+    """Update todo content using record_id
+    
+    Args:
+        record_id (int): The id of todo
+    """
+    if request.method == "POST":
+    	todo = Todo.query.get_or_404(record_id)
+    	new_content = request.form["new content"]
+    	todo.content = new_content
+    	db.session.commit()
+    	return redirect("/")
+    else:
+    	todo = Todo.query.get_or_404(record_id)
+    	return render_template("update.html", todo = todo)
+
 
 if __name__ == "__main__":
 	app.run(debug=True)
