@@ -13,6 +13,21 @@
 			<td>Date created</td>
 			<td>Options</td>
 		</tr>
+		{% for todo in todos %}
+		<tr>
+			<td>{{ todo.content }}</td>
+			<td>{{ todo.date_created }}</td>
+			<td>
+				<a href="">Delete</a>
+				<br>
+				<a href="">Update</a>
+			</td>
+		</tr>
+		{% endfor %}
 	</table>
+	<form action="/" method="POSt" accept-charset="utf-8">
+		<input type="text" name="content">
+		<input type="submit">
+	</form>
 </div>
 {% endblock %}
