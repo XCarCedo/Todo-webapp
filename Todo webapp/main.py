@@ -15,7 +15,7 @@ if not Path("main.db").is_file():
 
 @app.route("/", methods = ["GET", "POST"])
 def index_page():
-	"""Basically if the request is get list of todos shown otherwise the user
+	"""if the request is get list of todos shown otherwise the user
 	has used the form to add another todo and will be redirected to index page again
 	"""
 	if request.method == "POST":
